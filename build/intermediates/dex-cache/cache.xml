@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        jar="C:\Users\chand_000\Desktop\NJIT\Project1Transportation\WeatherForcast\app\libs\Volley.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="77faa9ffd189160d1e22c58fdf5eed0a9a08b816">
+        <dex dex="C:\Users\chand_000\Desktop\NJIT\Project1Transportation\WeatherForcast\app\build\intermediates\pre-dexed\debug\Volley-01ec6cbf629eb72609d1a8957096221f7c50143c.jar" />
+    </item>
+    <item
+        jar="C:\Users\chand_000\Desktop\NJIT\Project1Transportation\WeatherForcast\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.2.1\jars\libs\internal_impl-22.2.1.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="c471eaaba13ff64f6e0383d1c30a9cdc9a97efeb">
+        <dex dex="C:\Users\chand_000\Desktop\NJIT\Project1Transportation\WeatherForcast\app\build\intermediates\pre-dexed\debug\internal_impl-22.2.1-a72f2eade17cd02a46140c632f3f1772b3d56af1.jar" />
+    </item>
+    <item
+        jar="C:\Users\chand_000\AppData\Local\Android\Sdk\extras\android\m2repository\com\android\support\support-annotations\22.2.1\support-annotations-22.2.1.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="61a0ff5c29295ec56d7e0bd3d25d95dbf71b4b2b">
+        <dex dex="C:\Users\chand_000\Desktop\NJIT\Project1Transportation\WeatherForcast\app\build\intermediates\pre-dexed\debug\support-annotations-22.2.1-45e4c38970698ce1828b6e16182e10de26a32fbb.jar" />
+    </item>
+    <item
+        jar="C:\Users\chand_000\Desktop\NJIT\Project1Transportation\WeatherForcast\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.2.1\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="f8efd0096475e0daf054267b61544e10dc776503">
+        <dex dex="C:\Users\chand_000\Desktop\NJIT\Project1Transportation\WeatherForcast\app\build\intermediates\pre-dexed\debug\classes-d20d8ff69f49509dff5165bda32dfcb93e242e70.jar" />
+    </item>
+
+</items>
