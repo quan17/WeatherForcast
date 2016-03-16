@@ -1,9 +1,11 @@
 package com.cyz.activity;
 
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 import java.util.TimeZone;
 
@@ -11,10 +13,19 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import android.app.Activity;
+import android.content.Context;
+import android.location.Address;
+import android.location.Criteria;
+import android.location.Geocoder;
+import android.location.Location;
+import android.location.LocationManager;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request.Method;
@@ -26,11 +37,14 @@ import com.android.volley.toolbox.Volley;
 import com.ycz.weatherforcast.R;
 
 public class MainActivity extends Activity {
-	TextView tempTv, weatherTv, descTv, windTv;
+	TextView tempTv, weatherTv, descTv, windTv,addTv;
 	RequestQueue mQueue;
 	LinearLayout chart;
 
 	ArrayList<PointItem> list;
+
+	String cityName="Hainan";
+	AppLocationService appLocationService;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +56,11 @@ public class MainActivity extends Activity {
 		weatherTv = (TextView) findViewById(R.id.weather);
 		descTv = (TextView) findViewById(R.id.desc);
 		windTv = (TextView) findViewById(R.id.wind);
+		addTv=(TextView) findViewById(R.id.cityName);
+
 		mQueue = Volley.newRequestQueue(this);
+		appLocationService = new AppLocationService(
+				MainActivity.this);
 		list = new ArrayList<PointItem>();
 		// list.add(new PointItem("TUS", 233.2f));
 		// list.add(new PointItem("WEN", 222.4f));
@@ -50,9 +68,51 @@ public class MainActivity extends Activity {
 		// list.add(new PointItem("FRI", 223.5f));
 		// list.add(new PointItem("SAT", 255.5f));
 
-		getCurrent("Harrison");
-		getForcastSix("Harrison");
+		getLocation();
+//		getCurrent(cityName);
+//		getForcastSix(cityName);
 	}
+
+	private void getLocation(){
+		Location location = appLocationService
+				.getLocation(LocationManager.GPS_PROVIDER);
+
+		//you can hard-code the lat & long if you have issues with getting it
+		//remove the below if-condition and use the following couple of lines
+		//double latitude = 37.422005;
+		//double longitude = -122.084095
+
+		if (location != null) {
+			double latitude = location.getLatitude();
+			double longitude = location.getLongitude();
+			LocationAddress locationAddress = new LocationAddress();
+			locationAddress.getAddressFromLocation(latitude, longitude,
+					getApplicationContext(), new GeocoderHandler());
+		} else {
+//			showSettingsAlert();
+			Toast.makeText(this, "GPS not set yet", Toast.LENGTH_SHORT).show();
+		}
+	}
+
+	private class GeocoderHandler extends Handler {
+		@Override
+		public void handleMessage(Message message) {
+			String locationAddress;
+			switch (message.what) {
+				case 1:
+					Bundle bundle = message.getData();
+					locationAddress = bundle.getString("address");
+					break;
+				default:
+					locationAddress = null;
+			}
+			addTv.setText(locationAddress);
+			cityName=locationAddress;
+			getCurrent(cityName);
+			getForcastSix(cityName);
+		}
+	}
+
 
 	private void getCurrent(String cityName) {
 		// ��ǰ����
